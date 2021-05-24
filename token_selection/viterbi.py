@@ -39,7 +39,7 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
     bp = []
     fl = []
 
-    for i in xrange(0, n+1):
+    for i in range(0, n+1):
         pi.append(defaultdict())
         bp.append(defaultdict())
         fl.append(defaultdict())
@@ -49,7 +49,7 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
             fl[i][label] = []
     pi[0]['*'] = 0.0
     
-    for k in xrange(1, n+1):
+    for k in range(1, n+1):
         for u in labelset:
             max_score = float("-inf")
             argmax = '1'
