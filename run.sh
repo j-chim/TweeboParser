@@ -37,7 +37,7 @@ if [ "$#" -ne 1 ]; then
     echo "Usage: ./run.sh [path_to_raw_input_file_one_sentence_a_line]"
 else
 
-mkdir -p working_dir
+mkdir -p "${ROOT_DIR}/working_dir"
 
 # Starting point:
 # -- Raw text tweets, one line per tweet.
