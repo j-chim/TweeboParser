@@ -1,8 +1,10 @@
-### About 
-This fork contains minor changes to the scripts in the [upstream repo](https://github.com/ikekonglp/TweeboParser) to run on Python 3. Currently changes may **not** be backwards compatible.
+### About
+This fork contains minor changes to the scripts in the [upstream repo](https://github.com/ikekonglp/TweeboParser) to run on Python 3. 
+
+Note that currently changes are **not** backwards compatible (2021-05-24).
 
 
-### Source Repo README
+### Upstream
 
 Build status for Linux and Mac: [![Build Status](https://travis-ci.org/ikekonglp/TweeboParser.svg?branch=master)](https://travis-ci.org/ikekonglp/TweeboParser)
 
