@@ -15,11 +15,11 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with TweeboParser 1.0.  If not, see <http://www.gnu.org/licenses/>.
+#
+# (2021-05-24: Modified by Jenny Chim for Python 3)
+# /usr/bin/python
 
 import argparse
-import codecs
-import os
-import re
 import sys
 import io
 
@@ -30,10 +30,11 @@ A = parser.parse_args()
 
 
 def read_corpus(filename):
-    f = codecs.open(filename, "r", "utf-8")
     corpus = []
     sentence = []
-    for line in f:
+    with open(filename, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    for line in lines:
         if line.strip() == "":
             corpus.append(sentence)
             sentence = []
@@ -42,16 +43,15 @@ def read_corpus(filename):
             line = line.strip()
             cline = line.split(u"\t")
             sentence.append(cline)
-    f.close()
     return corpus
 
 def print_sentence(sentence, outputf):
     for line in sentence:
-        s = u""                 #unicode for Python2
+        s = ""                  
         for field in line:
-            s += field + "\t"   #Python2: unicode + str return unicode
-        s = s.strip()           #Python2: Still unicode
-        outputf.write(s+"\n")   #Python2: Still unicode
+            s += field + "\t"
+        s = s.strip() + "\n"
+        outputf.write(s)
     outputf.write("\n")
     return
 
@@ -67,8 +67,7 @@ def convert_sentence(sen):
     return new_sen 
 
 if __name__ == '__main__':
-    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    #sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
+    sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
     corpus = read_corpus(A.inputf)
 
     conll_format_corpus = []

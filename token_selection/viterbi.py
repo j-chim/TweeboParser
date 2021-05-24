@@ -39,7 +39,6 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
     bp = []
     fl = []
 
-    #print 'initializing...'
     for i in xrange(0, n+1):
         pi.append(defaultdict())
         bp.append(defaultdict())
@@ -50,7 +49,6 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
             fl[i][label] = []
     pi[0]['*'] = 0.0
     
-    # print 'main viterbi algorithm ...'
     for k in xrange(1, n+1):
         for u in labelset:
             max_score = float("-inf")
@@ -67,11 +65,6 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
             bp[k][u] = argmax
             fl[k][u] = best_feat
             
-#            for w in labelset:
-#                print "{0:.2f}".format(pi[k][w]) + " ",
-#            print 
-    
-    # print "decoding..."
     tags = []
     features =[]
     
@@ -79,7 +72,7 @@ def execute(sentence, labelset, postags, vecs1, vecs2, weights):
     best_last_label = '1'
     best_feat = ''
     for w in labelset:
-        local_score = 0.0 #get_score('<STOP>', w, weights)
+        local_score = 0.0 
         
         score = pi[n][w] + local_score
         if score > max_score:

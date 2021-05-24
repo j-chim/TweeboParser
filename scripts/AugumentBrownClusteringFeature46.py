@@ -26,9 +26,11 @@
 # Add 4 bits, 6 bits and all bits.
 # May 24, 2014
 # Add codecs to support utf-8
+#
+# (2021-05-24: Modified by Jenny Chim for Python 3)
+# /usr/bin/python
 
 import sys
-import codecs
 
 def usage():
     print("Usage: AugumentBrownClusteringFeature.py [Brown_Clustering_Dictionary] " \
@@ -43,9 +45,6 @@ if __name__ == "__main__":
         usage()
         sys.exit(2)
 
-    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    sys.stderr = codecs.getwriter('utf-8')(sys.stderr)
-
     brown_dict = dict()
     brown_file = open(sys.argv[1].strip(), "r")
     for line in brown_file:
@@ -54,26 +53,26 @@ if __name__ == "__main__":
             continue
         bl = line.split("\t")
         brown_dict[bl[1]] = bl[0]
-    #print brown_dict['upstage/downstage']
 
     inputf = sys.argv[2].strip()
-    for line in codecs.open(inputf, "r", "utf-8"):
-        line = line.strip()
-        if line == "":
-            sys.stdout.write("\n")
-            continue
-        cvlist = line.split("\t")
-        if sys.argv[3] == "N":
-            brown = brown_dict.get(cvlist[1].lower().strip(), 'OOV')
-        else:
-            brown = brown_dict.get(cvlist[1].strip(), 'OOV')
-        b4 = brown[:4] if len(brown) >= 4 else brown
-        b6 = brown[:6] if len(brown) >= 6 else brown
-        cvlist.append(b4)
-        cvlist.append(b6)
-        cvlist.append(brown)
-        tline = ""
-        for ele in cvlist:
-            tline = tline + ele + "\t"
-        tline = tline[:len(tline) - 1]
-        print(tline)
+    with open(inputf, "r") as f:
+        for line in f.readlines():
+            line = line.strip()
+            if line == "":
+                print("\n")
+                continue
+            cvlist = line.split("\t")
+            if sys.argv[3] == "N":
+                brown = brown_dict.get(cvlist[1].lower().strip(), 'OOV')
+            else:
+                brown = brown_dict.get(cvlist[1].strip(), 'OOV')
+            b4 = brown[:4] if len(brown) >= 4 else brown
+            b6 = brown[:6] if len(brown) >= 6 else brown
+            cvlist.append(b4)
+            cvlist.append(b6)
+            cvlist.append(brown)
+            tline = ""
+            for ele in cvlist:
+                tline = tline + ele + "\t"
+            tline = tline[:len(tline) - 1]
+            print(tline)

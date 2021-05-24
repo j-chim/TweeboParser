@@ -16,6 +16,8 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with TweeboParser 1.0.  If not, see <http://www.gnu.org/licenses/>.
+#
+# (2021-05-24: Modified by Jenny Chim for Python 3)
 
 
 # This script runs the whole pipeline of TweeboParser. It reads from a raw text input
